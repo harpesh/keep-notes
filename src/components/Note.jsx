@@ -1,10 +1,12 @@
 import React from 'react'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import { IconButton } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteNote } from '../app/counterslice'
 
+const Note = ({ note }) => {
+    const { title, content,id } = note;
 
-const Note = ({ note, onDelete }) => {
-    const { title, content } = note;
+    const dispatch = useDispatch()
 
     return (
         <div className='max-w-[238px] min-w-[238px]bg-white p-4 m-2 rounded-md  border border-blue-200   scrollbar-hide'>
@@ -13,9 +15,9 @@ const Note = ({ note, onDelete }) => {
                 <pre>{content}</pre>
             </div>   
 
-            <div>
+            <div>       
                 <button
-                    onClick={onDelete}
+                    onClick={()=>dispatch(deleteNote(id))}
                     className='text-red-500 float-end hover:text-red-700 mt-1'
                 >
                     <DeleteOutlineIcon />
